@@ -1,2 +1,34 @@
-.env
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environments
+venv/
+env/
+.venv/
+myenv/
 es_doc_env/
+
+# Environment files
+.env
+*.env
+
+# IDE / Editor settings
+.vscode/
+.idea/
+
+# Logs
+*.log
+nohup.out
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Coverage / testing
+.coverage
+htmlcov/
+.pytest_cache/
