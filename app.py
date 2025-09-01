@@ -9,6 +9,8 @@ from google import genai
 from fastapi.responses import JSONResponse
 
 
+
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s"
