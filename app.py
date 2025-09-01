@@ -1,8 +1,9 @@
 # app.py
 from fastapi import FastAPI
 from vision_model_call.gemini_vision_call import extract_from_pdf
+from vision_model_call.call_for_header import extract_table_headers
 from fastapi import FastAPI
-from model.models import ExtractRequest
+from model.models import ExtractRequest,ExtractHeader
 import logging,uvicorn,os
 from google import genai
 from fastapi.responses import JSONResponse
@@ -72,9 +73,21 @@ def extract(request: ExtractRequest):
     Extract data from PDF according to schema.
     """
     logger.info(f"Received extract request for {request.pdf_path}")
-    result = extract_from_pdf(request.pdf_path, request.schema)
+    result = extract_from_pdf(request.pdf_path, request.schema,request.total_schema)
     return {"data": result}
 
+
+@app.post("/get_header")
+def get_headers(request: ExtractHeader):
+    """
+    Extract only table headers from PDF and map to schema keys.
+    """
+    if not gemini_client:
+        return JSONResponse(content={"error": "Gemini client not initialized"}, status_code=500)
+
+    logger.info(f"Received header extraction request for {request.pdf_path}")
+    result = extract_table_headers(request.pdf_path, request.schema)
+    return {"headers": result}
 
 if __name__ == "__main__":
     uvicorn.run(
