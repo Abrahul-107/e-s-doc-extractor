@@ -1,6 +1,6 @@
 # app.py
 from fastapi import FastAPI
-from vision_model_call.gemini_vision_call import extract_from_pdf
+from vision_model_call.gemini_vision_v2 import extract_from_pdf
 from vision_model_call.call_for_header import extract_table_headers
 from fastapi import FastAPI
 from model.models import ExtractRequest,ExtractHeader
